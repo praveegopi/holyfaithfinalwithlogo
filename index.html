@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holyfaith Group of Institutions | Excellence in Education</title>
+    <meta name="description" content="Holyfaith Group - World class education in Nursing, Physiotherapy and Technology.">
+
+    <!-- Fonts: Poppins (Clean, Academic, Modern) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- 1. BRAND COLORS --- */
+        :root {
+            --primary: #006a4e;        /* Deep Academic Green */
+            --primary-dark: #004d38;
+            --accent: #e31e24;         /* Action Red */
+            --text-dark: #212529;
+            --text-gray: #6c757d;
+            --white: #ffffff;
+            --light-bg: #f8f9fa;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; color: var(--text-dark); overflow-x: hidden; background: var(--white); }
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        
+        /* --- 2. HEADER & NAV --- */
+        .top-utility { 
+            background: #f1f1f1; padding: 8px 5%; 
+            display: flex; justify-content: flex-end; 
+            font-size: 0.8rem; gap: 20px; color: var(--text-gray); border-bottom: 1px solid #ddd;
+        }
+        
+        header { 
+            background: var(--white); height: 100px; padding: 0 5%; 
+            display: flex; align-items: center; justify-content: space-between;
+            position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        
+        /* --- UPDATED LOGO STYLING --- */
+        .logo { 
+            display: flex; 
+            align-items: center; 
+            gap: 15px; /* Space between the shield image and the text */
+            text-decoration: none;
+        }
+        
+        /* Image Styling */
+        .logo img {
+            height: 75px; /* Sets a fixed height so it fits the header */
+            width: auto;  /* Keeps the aspect ratio correct */
+            object-fit: contain;
+        }
+
+        /* Text Styling */
+        .logo-text {
+            font-size: 1.8rem; 
+            font-weight: 800; 
+            color: var(--primary); 
+            line-height: 1;
+            display: flex;
+            flex-direction: column; /* Optional: Stacks text if needed, or row */
+        }
+
+        .logo-text span { 
+            color: var(--text-dark); 
+            font-weight: 300; 
+            font-size: 1rem; 
+            letter-spacing: 2px;
+            margin-top: -2px;
+        }
+
+        /* Desktop Nav */
+        .nav-links { display: flex; gap: 30px; align-items: center; }
+        .nav-links a { font-weight: 600; font-size: 0.9rem; color: var(--text-dark); text-transform: uppercase; letter-spacing: 0.5px; }
+        .nav-links a:hover { color: var(--primary); }
+        
+        .btn-apply-header { 
+            background: var(--accent); color: white !important; 
+            padding: 12px 30px; border-radius: 4px; font-weight: 700;
+        }
+        .btn-apply-header:hover { background: #c0181d; }
+
+        /* Mobile Hamburger Icon */
+        .mobile-toggle { display: none; font-size: 1.5rem; color: var(--primary); cursor: pointer; }
+
+        /* --- 3. HERO SECTION --- */
+        .hero { 
+            position: relative; 
+            height: 90vh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            overflow: hidden; 
+            background: #000;
+        }
+        
+        .hero-video {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+            object-fit: cover; z-index: 0; opacity: 0.6;
+        }
+        
+        .hero-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.4); z-index: 1;
+        }
+
+        .hero-content { 
+            text-align: center; color: white; position: relative; z-index: 2; 
+            max-width: 900px; padding: 20px; animation: fadeInUp 1s ease; 
+        }
+        
+        .hero h1 { font-size: 4rem; margin-bottom: 20px; font-weight: 700; line-height: 1.1; }
+        .hero p { font-size: 1.4rem; margin-bottom: 40px; font-weight: 300; opacity: 0.9; }
+        
+        .search-program {
+            background: white; padding: 8px; border-radius: 50px; display: flex; 
+            width: 100%; max-width: 700px; margin: 0 auto; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .search-program input { flex: 1; border: none; padding: 15px 25px; outline: none; font-size: 1rem; border-radius: 50px; }
+        .search-program button { background: var(--primary); color: white; border: none; padding: 15px 40px; border-radius: 50px; font-weight: 600; cursor: pointer; transition: 0.3s; }
+
+        /* --- 4. SIDEBAR --- */
+        .side-widget {
+            position: fixed; right: 0; top: 50%; transform: translateY(-50%);
+            z-index: 9999; display: flex; flex-direction: column; gap: 2px;
+        }
+
+        .widget-item {
+            background: var(--primary); color: white; padding: 20px 10px;
+            writing-mode: vertical-rl; text-orientation: mixed; font-weight: 600; 
+            text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; cursor: pointer;
+            border-radius: 4px 0 0 4px; box-shadow: -2px 2px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease; text-align: center; display: flex; align-items: center; justify-content: center;
+            text-decoration: none; width: 45px;
+        }
+
+        .widget-item:hover { width: 60px; background: var(--primary-dark); }
+        .widget-item.red { background: var(--accent); }
+        .widget-item.red:hover { background: #c0181d; }
+        .widget-item i { font-size: 1.2rem; margin-bottom: 10px; writing-mode: horizontal-tb; }
+
+        /* --- 5. SECTIONS --- */
+        .section-padding { padding: 80px 5%; }
+        .section-header { text-align: center; margin-bottom: 50px; }
+        .section-header h2 { font-size: 2.5rem; color: var(--primary); margin-bottom: 10px; }
+        
+        .cards-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        
+        .card { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.08); transition: 0.3s; border-bottom: 4px solid transparent; display: flex; flex-direction: column;}
+        .card:hover { transform: translateY(-10px); border-bottom: 4px solid var(--accent); }
+        .card-img-wrap { height: 220px; overflow: hidden; }
+        .card img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .card:hover img { transform: scale(1.1); }
+        .card-body { padding: 25px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .read-more { color: var(--accent); font-weight: 700; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; margin-top: 15px; display: inline-block;}
+
+        /* --- 6. CAMPUS SPLIT --- */
+        .campus-split { display: grid; grid-template-columns: 1fr 1fr; min-height: 500px; }
+        .campus-content { padding: 80px 60px; display: flex; flex-direction: column; justify-content: center; background: #f4f6f8; }
+        .campus-image { background: url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1000') center/cover; }
+
+        /* --- 7. FOOTER --- */
+        footer { background: #1a1a1a; color: #aaa; padding: 70px 5%; margin-top: 0; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px; margin-bottom: 50px; border-bottom: 1px solid #333; padding-bottom: 50px; }
+        .footer-col h4 { color: white; margin-bottom: 25px; font-size: 1.1rem; }
+        .footer-links li { margin-bottom: 12px; display: flex; align-items: flex-start; }
+        .footer-links i { margin-top: 5px; color: var(--accent); }
+        
+        .social-icons { display: flex; gap: 15px; margin-top: 20px; }
+        .social-icons a { width: 40px; height: 40px; background: #333; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: 0.3s; }
+        .social-icons a:hover { background: var(--accent); transform: translateY(-3px); }
+
+        /* --- 8. MOBILE RESPONSIVENESS --- */
+        @media (max-width: 900px) {
+            .logo img { height: 50px; } /* Smaller logo on mobile */
+            .logo-text { font-size: 1.3rem; }
+            .logo-text span { font-size: 0.8rem; }
+            
+            .mobile-toggle { display: block; }
+            
+            .nav-links {
+                position: absolute; top: 100px; left: 0; width: 100%;
+                background: white; flex-direction: column; align-items: flex-start;
+                padding: 20px; gap: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+                display: none; 
+            }
+            .nav-links.active { display: flex; } 
+            .nav-links a { width: 100%; padding: 10px 0; border-bottom: 1px solid #eee; }
+            .btn-apply-header { width: 100%; text-align: center; margin-top: 10px; }
+
+            .hero h1 { font-size: 2.2rem; }
+            .hero p { font-size: 1rem; }
+            .search-program { flex-direction: column; padding: 15px; border-radius: 10px; }
+            .search-program input { margin-bottom: 10px; border-bottom: 1px solid #ddd; padding: 10px; border-radius: 0; }
+            .search-program button { width: 100%; padding: 12px; }
+
+            .section-padding { padding: 50px 20px; }
+            .cards-container { grid-template-columns: 1fr; }
+            .campus-split { grid-template-columns: 1fr; }
+            .campus-image { height: 300px; order: -1; }
+            .campus-content { padding: 40px 20px; }
+            .side-widget { display: none; }
+            .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SIDEBAR (Visible on Desktop) -->
+    <div class="side-widget">
+        <a href="admission.html" class="widget-item red">
+            <i class="fas fa-edit"></i> Admission
+        </a>
+        <a href="chat.html" class="widget-item">
+            <i class="fas fa-comments"></i> Student Chat
+        </a>
+        <a href="contact.html" class="widget-item">
+            <i class="fas fa-phone-alt"></i> Contact Us
+        </a>
+    </div>
+
+    <!-- UTILITY BAR -->
+    <div class="top-utility">
+        <span>Alumni</span> <span>Parents</span> <span>Faculty</span>
+    </div>
+
+    <!-- MAIN HEADER -->
+    <header>
+        <!-- UPDATED LOGO SECTION -->
+        <a href="index.html" class="logo">
+            <!-- 1. The Image -->
+            <img src="logo.png" alt="Holyfaith Logo">
+            
+            <!-- 2. The Text (HOLYFAITH GROUP) -->
+            <div class="logo-text">
+                HOLYFAITH <span>GROUP</span>
+            </div>
+        </a>
+        
+        <div class="mobile-toggle" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+
+        <nav class="nav-links" id="navMenu">
+            <a href="about.html">About Us</a>
+            <a href="academics.html">Academics</a>
+            <a href="research.html">Research</a>
+            <a href="chat.html">Campus Life</a>
+            <a href="placements.html">Placements</a>
+            <a href="admission.html" class="btn-apply-header">Apply Now</a>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <video autoplay muted loop playsinline class="hero-video" poster="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1000">
+            <source src="https://videos.pexels.com/video-files/8199326/8199326-hd_1920_1080_25fps.mp4" type="video/mp4">
+        </video>
+        
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+            <h1>Committed to Excellence <br>in Education</h1>
+            <p>Empowering the future generation with integrity, ethics, and world-class knowledge.</p>
+            
+            <form class="search-program" action="academics.html">
+                <input type="text" placeholder="I want to study... (e.g. Nursing)">
+                <button type="submit">Find Program</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- ACADEMIC DISCIPLINES (UPDATED) -->
+    <section class="section-padding">
+        <div class="section-header">
+            <h2>Our Institutions</h2>
+            <p>Diverse disciplines designed for the global workforce.</p>
+        </div>
+        <div class="cards-container">
+            <!-- Card 1: Physiotherapy -->
+            <div class="card">
+                <div class="card-img-wrap">
+                    <img src="https://images.pexels.com/photos/5793953/pexels-photo-5793953.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Physiotherapy">
+                </div>
+                <div class="card-body">
+                    <h3>College of Physiotherapy</h3>
+                    <p>State-of-the-art rehabilitation labs and clinical training for future professionals.</p>
+                    <a href="academics.html" class="read-more">View Course <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Card 2: College of Nursing -->
+            <div class="card">
+                <div class="card-img-wrap">
+                    <img src="https://images.pexels.com/photos/3844581/pexels-photo-3844581.jpeg?auto=compress&cs=tinysrgb&w=800" alt="College of Nursing">
+                </div>
+                <div class="card-body">
+                    <h3>College of Nursing</h3>
+                    <p>Compassionate care combined with advanced medical technology and ethics.</p>
+                    <a href="academics.html" class="read-more">View Course <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Card 3: School of Nursing -->
+            <div class="card">
+                <div class="card-img-wrap">
+                    <img src="https://images.pexels.com/photos/1181396/pexels-photo-1181396.jpeg?auto=compress&cs=tinysrgb&w=800" alt="School of Nursing">
+                </div>
+                <div class="card-body">
+                    <h3>School of Nursing</h3>
+                    <p>Building strong foundations in patient care and community health services.</p>
+                    <a href="academics.html" class="read-more">View Course <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Card 4: Medical Lab Technology -->
+            <div class="card">
+                <div class="card-img-wrap">
+                    <img src="https://images.pexels.com/photos/2280568/pexels-photo-2280568.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Medical Lab Technology">
+                </div>
+                <div class="card-body">
+                    <h3>College of Medical Lab Technology</h3>
+                    <p>Mastering diagnostic precision with modern laboratory infrastructure.</p>
+                    <a href="academics.html" class="read-more">View Course <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CAMPUS LIFE -->
+    <section class="campus-split">
+        <div class="campus-content">
+            <h2 style="color:var(--primary); font-size: 2.5rem; margin-bottom: 20px;">Life at Holyfaith</h2>
+            <p style="color:var(--text-gray); margin-bottom: 30px; font-size: 1.1rem;">
+                Beyond academics, we focus on holistic development. Our Haripriyam and Emnoble campuses provide a vibrant environment for sports, arts, and community service.
+            </p>
+            <ul style="margin-bottom: 30px; list-style: none;">
+                <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color:var(--accent); margin-right: 10px;"></i> Modern Hostels & Dining</li>
+                <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color:var(--accent); margin-right: 10px;"></i> 24/7 Digital Library</li>
+                <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color:var(--accent); margin-right: 10px;"></i> Advanced Simulation Labs</li>
+            </ul>
+            <a href="chat.html" class="btn-apply-header" style="background:var(--primary); width: fit-content;">Take Virtual Tour</a>
+        </div>
+        <div class="campus-image"></div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h2 style="color:white; margin-bottom: 20px;">HOLYFAITH</h2>
+                <p>Empowering the future generation through excellence in education.</p>
+                
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="admission.html">Admissions</a></li>
+                    <li><a href="academics.html">Academics</a></li>
+                    <li><a href="chat.html">Student Life</a></li>
+                    <li><a href="placements.html">Placements</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <ul class="footer-links">
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Jyothinagar, Marripalem Near Raman school<br>Visakhapatnam, Andhra Pradesh 530018</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-phone"></i>
+                        <div style="display:flex; flex-direction:column;">
+                            <a href="tel:8125444777">8125 444 777</a>
+                            <a href="tel:9154451345">9154 451 345</a>
+                            <a href="tel:9908777465">9908 777 465</a>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:Holyfaithgroupofinstitutions@gmail.com">Holyfaithgroupofinstitutions@gmail.com</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <p style="text-align: center; border-top: 1px solid #333; padding-top: 20px;">&copy; 2026 Holyfaith Group of Institutions. All Rights Reserved.</p>
+    </footer>
+
+    <!-- JAVASCRIPT FOR MOBILE MENU -->
+    <script>
+        function toggleMenu() {
+            const nav = document.getElementById('navMenu');
+            nav.classList.toggle('active');
+        }
+    </script>
+
+</body>
+</html>

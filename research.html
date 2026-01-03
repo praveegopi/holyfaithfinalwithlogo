@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research & Innovation | Holyfaith Group of Institutions</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- BRAND THEME --- */
+        :root { 
+            --primary: #006a4e; 
+            --primary-dark: #004d38;
+            --accent: #e31e24; 
+            --text-dark: #212529; 
+            --text-gray: #6c757d;
+            --light-bg: #f8f9fa; 
+            --white: #ffffff; 
+            --overlay: rgba(0,0,0,0.7); 
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family: 'Poppins', sans-serif; background: var(--white); color: var(--text-dark); overflow-x: hidden; }
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+
+        /* --- HEADER --- */
+        header { 
+            background: var(--white); height: 100px; padding: 0 5%; 
+            display: flex; align-items: center; justify-content: space-between; 
+            position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+        }
+
+        /* --- LOGO WITH BACK ARROW --- */
+        .logo-area { 
+            display: flex; align-items: center; gap: 15px; 
+            text-decoration: none; cursor: pointer;
+        }
+        .back-arrow {
+            font-size: 1.4rem; color: var(--primary); transition: transform 0.3s ease;
+        }
+        .logo-area:hover .back-arrow { transform: translateX(-5px); }
+        
+        /* Top Logo Image Style */
+        .logo-area img { height: 70px; width: auto; object-fit: contain; }
+        
+        .logo-text { font-size: 1.8rem; font-weight: 800; color: var(--primary); line-height: 1; display: flex; flex-direction: column; }
+        .logo-text span { color: var(--text-dark); font-weight: 300; font-size: 1rem; letter-spacing: 2px; margin-top: -2px; }
+
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { font-weight: 600; font-size: 0.9rem; text-transform: uppercase; }
+        .nav-links a:hover { color: var(--primary); }
+        .btn-apply { background: var(--accent); color: white !important; padding: 10px 25px; border-radius: 4px; font-weight: 700; }
+
+        /* --- RESEARCH HERO (VIDEO) --- */
+        .res-hero { 
+            position: relative; height: 60vh; width: 100%;
+            display: flex; align-items: center; justify-content: center;
+            color: white; overflow: hidden; background: #000;
+        }
+        .video-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; z-index: 0; opacity: 0.5;
+        }
+        .res-hero-content { 
+            position: relative; z-index: 2; text-align: left; 
+            max-width: 800px; padding: 0 20px; animation: fadeInUp 1s ease; 
+        }
+        .res-hero h1 { font-size: 3.5rem; margin-bottom: 15px; font-weight: 700; line-height: 1.2; }
+        .res-hero p { font-size: 1.2rem; opacity: 0.9; margin-bottom: 30px; font-weight: 300; }
+        .btn-res { 
+            background: var(--accent); color: white; padding: 15px 40px; 
+            border-radius: 50px; font-weight: 700; letter-spacing: 0.5px; display: inline-block;
+        }
+        .btn-res:hover { background: #c0181d; transform: scale(1.05); }
+
+        /* --- STATS BAR --- */
+        .res-stats { 
+            background: white; padding: 60px 10%; 
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; text-align: center; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); position: relative; z-index: 5; margin-top: -50px; border-radius: 8px; max-width: 1200px; margin-left: auto; margin-right: auto;
+        }
+        .stat-num { font-size: 2.5rem; font-weight: 800; color: var(--primary); display: block; margin-bottom: 5px; }
+        .stat-label { font-size: 0.85rem; text-transform: uppercase; color: #666; letter-spacing: 1px; font-weight: 600; }
+
+        /* --- FOCUS AREAS (The 4 Colleges) --- */
+        .focus-section { padding: 100px 10%; background: var(--light-bg); }
+        .section-head { text-align: center; margin-bottom: 60px; }
+        .section-head h2 { font-size: 2.5rem; color: var(--primary); margin-bottom: 10px; font-weight: 700; }
+        .section-head span { color: var(--accent); font-weight: 700; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 2px; }
+
+        .focus-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        
+        .focus-card { 
+            position: relative; overflow: hidden; border-radius: 12px; height: 380px; cursor: pointer; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .focus-bg {  
+            position: absolute; top:0; left:0; width:100%; height:100%; 
+            background-size: cover; background-position: center; transition: 0.6s ease;
+        }
+        .focus-card:hover .focus-bg { transform: scale(1.15); }
+        
+        .focus-overlay {  
+            position: absolute; top:0; left:0; width:100%; height:100%; 
+            background: linear-gradient(to top, rgba(0,106,78,0.95), transparent 60%); 
+            display: flex; flex-direction: column; justify-content: flex-end; padding: 30px; color: white;
+            transition: 0.3s;
+        }
+        .focus-card:hover .focus-overlay { background: linear-gradient(to top, rgba(227, 30, 36, 0.9), transparent 50%); }
+
+        .focus-overlay h3 { font-size: 1.4rem; margin-bottom: 10px; font-weight: 700; }
+        .focus-overlay p { font-size: 0.9rem; opacity: 0.9; line-height: 1.5; }
+        .focus-icon { font-size: 2rem; margin-bottom: auto; align-self: flex-end; opacity: 0.8; }
+
+        /* --- SPOTLIGHT SECTION --- */
+        .spotlight-section { padding: 80px 10%; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; background: white; }
+        .spotlight-img img { width: 100%; border-radius: 10px; box-shadow: 20px 20px 0px var(--primary); }
+        .spotlight-text h4 { color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+        .spotlight-text h2 { font-size: 2.2rem; color: var(--text-dark); margin-bottom: 20px; font-weight: 700; }
+        .spotlight-text p { color: #555; margin-bottom: 20px; line-height: 1.7; }
+        .research-tag { background: #eee; padding: 5px 15px; border-radius: 50px; font-size: 0.8rem; font-weight: 600; margin-right: 10px; }
+
+        /* --- SCROLLING NEWS TICKER --- */
+        .news-ticker-wrap {
+            background: var(--text-dark);
+            color: white;
+            padding: 15px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+            border-top: 4px solid var(--accent);
+        }
+        
+        .news-label {
+            position: absolute; left: 0; top: 0; bottom: 0;
+            background: var(--accent);
+            padding: 0 30px;
+            display: flex; align-items: center;
+            font-weight: 800; z-index: 10;
+            box-shadow: 5px 0 15px rgba(0,0,0,0.5);
+        }
+
+        .ticker-content {
+            display: inline-block;
+            animation: ticker 40s linear infinite;
+            padding-left: 100%; /* Start off-screen */
+        }
+
+        .ticker-item {
+            display: inline-block;
+            padding: 0 40px;
+            font-size: 1rem;
+            position: relative;
+        }
+
+        .ticker-item::after {
+            content: '•';
+            position: absolute; right: 0; color: var(--accent);
+        }
+
+        @keyframes ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* --- FOOTER --- */
+        footer { background: #1a1a1a; color: #aaa; padding: 70px 5%; margin-top: 0; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; border-bottom: 1px solid #333; padding-bottom: 50px; margin-bottom: 20px; }
+        
+        /* Footer Logo Style */
+        .footer-logo-wrap { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+        .footer-logo-wrap img { height: 60px; width: auto; }
+        .footer-logo-wrap h2 { font-size: 1.2rem; color: white; line-height: 1.2; font-weight: 700; margin: 0; }
+        .footer-logo-wrap h2 span { font-size: 0.8rem; font-weight: 300; display: block; color: #ccc; letter-spacing: 1px; }
+
+        .footer-col h4 { color: white; margin-bottom: 25px; }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 12px; display: flex; gap: 10px;}
+        .social-icons { display: flex; gap: 15px; margin-top: 20px; }
+        .social-icons a { width: 40px; height: 40px; background: #333; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: 0.3s; }
+        .social-icons a:hover { background: var(--accent); }
+
+        @media (max-width: 900px) {
+            .res-hero h1 { font-size: 2.5rem; }
+            .res-stats { grid-template-columns: 1fr 1fr; margin-top: 0; }
+            .spotlight-section { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .logo-area img { height: 50px; }
+            .logo-text { font-size: 1.3rem; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity:0; transform:translateY(20px); }
+            to { opacity:1; transform:translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER WITH BACK ARROW & LOGO -->
+    <header>
+        <a href="index.html" class="logo-area">
+            <!-- Back Arrow -->
+            <i class="fas fa-arrow-left back-arrow"></i>
+            
+            <!-- Logo Image -->
+            <img src="logo.png" alt="Holyfaith Logo">
+            
+            <!-- Text -->
+            <div class="logo-text">
+                HOLYFAITH <span>GROUP</span>
+            </div>
+        </a>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="academics.html">Academics</a>
+            <a href="research.html" style="color: var(--primary);">Research</a>
+            <a href="admission.html" class="btn-apply">Apply Now</a>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION (VIDEO) -->
+    <div class="res-hero">
+        <video autoplay muted loop playsinline class="video-bg">
+            <source src="https://videos.pexels.com/video-files/3191572/3191572-hd_1920_1080_25fps.mp4" type="video/mp4">
+        </video>
+        
+        <div class="res-hero-content">
+            <h1>Innovation for a <br>Healthier World</h1>
+            <p>Pioneering research across Physiotherapy, Nursing, and Medical Technology.</p>
+            <a href="#areas" class="btn-res">Our Focus Areas</a>
+        </div>
+    </div>
+
+    <!-- STATS BAR -->
+    <div class="res-stats">
+        <div>
+            <span class="stat-num">120+</span>
+            <span class="stat-label">Student Projects</span>
+        </div>
+        <div>
+            <span class="stat-num">50+</span>
+            <span class="stat-label">Health Camps</span>
+        </div>
+        <div>
+            <span class="stat-num">15</span>
+            <span class="stat-label">Awards Won</span>
+        </div>
+        <div>
+            <span class="stat-num">4</span>
+            <span class="stat-label">Core Labs</span>
+        </div>
+    </div>
+
+    <!-- KEY RESEARCH AREAS (THE 4 COLLEGES) -->
+    <section id="areas" class="focus-section">
+        <div class="section-head">
+            <span>Discover</span>
+            <h2>Institutional Research</h2>
+            <p style="color:#666; max-width:600px; margin:0 auto;">Each of our institutions drives innovation in its specific field.</p>
+        </div>
+
+        <div class="focus-grid">
+            
+            <!-- Card 1: Physiotherapy -->
+            <div class="focus-card">
+                <div class="focus-bg" style="background-image: url('https://images.pexels.com/photos/5793953/pexels-photo-5793953.jpeg?auto=compress&cs=tinysrgb&w=800');"></div>
+                <div class="focus-overlay">
+                    <i class="fas fa-dumbbell focus-icon"></i>
+                    <h3>Physiotherapy Research</h3>
+                    <p>Focusing on Neuro-rehabilitation, Sports Medicine, and Biomechanics for faster patient recovery.</p>
+                </div>
+            </div>
+
+            <!-- Card 2: College of Nursing -->
+            <div class="focus-card">
+                <div class="focus-bg" style="background-image: url('https://images.pexels.com/photos/3844581/pexels-photo-3844581.jpeg?auto=compress&cs=tinysrgb&w=800');"></div>
+                <div class="focus-overlay">
+                    <i class="fas fa-user-nurse focus-icon"></i>
+                    <h3>Advanced Nursing</h3>
+                    <p>Researching patient safety protocols, critical care methodologies, and geriatric care management.</p>
+                </div>
+            </div>
+
+            <!-- Card 3: School of Nursing -->
+            <div class="focus-card">
+                <div class="focus-bg" style="background-image: url('https://images.pexels.com/photos/5452201/pexels-photo-5452201.jpeg?auto=compress&cs=tinysrgb&w=800');"></div>
+                <div class="focus-overlay">
+                    <i class="fas fa-hands-helping focus-icon"></i>
+                    <h3>Community Health</h3>
+                    <p>Studies on rural hygiene, maternal health awareness, and first-aid implementation strategies.</p>
+                </div>
+            </div>
+
+            <!-- Card 4: MLT -->
+            <div class="focus-card">
+                <div class="focus-bg" style="background-image: url('https://images.pexels.com/photos/2280568/pexels-photo-2280568.jpeg?auto=compress&cs=tinysrgb&w=800');"></div>
+                <div class="focus-overlay">
+                    <i class="fas fa-microscope focus-icon"></i>
+                    <h3>Medical Lab Tech</h3>
+                    <p>Innovating in molecular diagnostics, pathology automation, and disease detection accuracy.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- RESEARCH SPOTLIGHT -->
+    <section class="spotlight-section">
+        <div class="spotlight-img">
+            <img src="https://images.pexels.com/photos/8460349/pexels-photo-8460349.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Lab Work">
+        </div>
+        <div class="spotlight-text">
+            <h4>Innovation Spotlight</h4>
+            <h2>AI in Diagnostic Pathology</h2>
+            <p>
+                Our Medical Lab Technology department is currently collaborating on a pilot project to integrate Artificial Intelligence in blood sample analysis. This aims to reduce error rates in detecting rare blood disorders by 40%.
+            </p>
+            <div style="margin-top: 20px;">
+                <span class="research-tag">#MLT</span>
+                <span class="research-tag">#ArtificialIntelligence</span>
+                <span class="research-tag">#FutureHealth</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- SCROLLING NEWS TICKER -->
+    <div class="news-ticker-wrap">
+        <div class="news-label">LATEST NEWS</div>
+        <div class="ticker-content">
+            <span class="ticker-item">WHO announces new guidelines for post-operative nursing care standards (2024).</span>
+            <span class="ticker-item">Breakthrough in Neuro-Physiotherapy: VR technology shows 30% faster recovery in stroke patients.</span>
+            <span class="ticker-item">Global Medical Lab Tech Summit 2025 to focus on molecular diagnostics and automation.</span>
+            <span class="ticker-item">Ministry of Health launches new grant for rural community nursing initiatives.</span>
+            <span class="ticker-item">Holyfaith Group students win 1st Prize at National Bio-Mechanics Expo.</span>
+            <span class="ticker-item">New research links sleep patterns to faster muscle recovery in sports therapy.</span>
+        </div>
+    </div>
+
+    <!-- FOOTER WITH UPDATED LOGO & ADDRESS -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <!-- UPDATED FOOTER LOGO -->
+                <div class="footer-logo-wrap">
+                    <img src="logo.png" alt="Holyfaith Footer Logo">
+                    <h2>HOLYFAITH <br><span>GROUP OF INSTITUTIONS</span></h2>
+                </div>
+                <p>Advancing Knowledge, Transforming Lives.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="admission.html">Admissions</a></li>
+                    <li><a href="academics.html">Academics</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <ul class="footer-links">
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Jyothinagar, Marripalem Near Raman school<br>Visakhapatnam, Andhra Pradesh 530018</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-phone"></i>
+                        <div style="display:flex; flex-direction:column;">
+                            <span>8125 444 777</span>
+                            <span>9154 451 345</span>
+                            <span>9908 777 465</span>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <span>Holyfaithgroupofinstitutions@gmail.com</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <p style="text-align: center; border-top: 1px solid #333; padding-top: 20px;">&copy; 2026 Holyfaith Group of Institutions. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academics | Holyfaith Group of Institutions</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- BRAND THEME --- */
+        :root { 
+            --primary: #006a4e; 
+            --primary-dark: #004d38;
+            --accent: #e31e24; 
+            --text-dark: #212529; 
+            --text-gray: #6c757d;
+            --light-bg: #f8f9fa; 
+            --white: #ffffff; 
+            --overlay: rgba(0,0,0,0.7); 
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family: 'Poppins', sans-serif; background: var(--light-bg); color: var(--text-dark); overflow-x: hidden; }
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        
+        /* --- HEADER --- */
+        header { 
+            background: var(--white); height: 100px; padding: 0 5%; 
+            display: flex; align-items: center; justify-content: space-between; 
+            position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+        }
+
+        /* --- UPDATED LOGO WITH BACK ARROW --- */
+        .logo-area { 
+            display: flex; align-items: center; gap: 15px; 
+            text-decoration: none; cursor: pointer;
+        }
+
+        /* Back Arrow Style */
+        .back-arrow {
+            font-size: 1.4rem;
+            color: var(--primary);
+            transition: transform 0.3s ease;
+        }
+        
+        /* Hover Effect: Arrow moves left */
+        .logo-area:hover .back-arrow {
+            transform: translateX(-5px); 
+        }
+
+        .logo-area img { height: 70px; width: auto; object-fit: contain; }
+        
+        .logo-text { font-size: 1.8rem; font-weight: 800; color: var(--primary); line-height: 1; display: flex; flex-direction: column; }
+        .logo-text span { color: var(--text-dark); font-weight: 300; font-size: 1rem; letter-spacing: 2px; margin-top: -2px; }
+
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { font-weight: 600; font-size: 0.9rem; text-transform: uppercase; }
+        .nav-links a:hover { color: var(--primary); }
+        .btn-apply { background: var(--accent); color: white !important; padding: 10px 25px; border-radius: 4px; font-weight: 700; }
+
+        /* --- ACADEMIC HERO --- */
+        .acad-hero { 
+            position: relative; height: 60vh; width: 100%;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; color: white; background: #000; overflow: hidden;
+        }
+        
+        .hero-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; z-index: 0; opacity: 0.5;
+        }
+
+        .hero-content { position: relative; z-index: 2; width: 100%; padding: 0 20px; animation: fadeInUp 1s ease; }
+        .hero-content h1 { font-size: 3.5rem; margin-bottom: 10px; font-weight: 700; }
+        .hero-content p { font-size: 1.2rem; font-weight: 300; margin-bottom: 30px; }
+
+        /* SEARCH BAR */
+        .course-search {
+            max-width: 700px; margin: 0 auto; display: flex;
+            background: white; border-radius: 50px; padding: 5px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .course-search input { border: none; flex: 1; padding: 15px 25px; border-radius: 50px; outline: none; font-size: 1rem; }
+        .course-search button { background: var(--primary); color: white; border: none; padding: 10px 40px; border-radius: 50px; font-weight: 700; cursor: pointer; transition: 0.3s; }
+        .course-search button:hover { background: var(--accent); }
+
+        /* --- COURSE CARDS SECTION --- */
+        .section-padding { padding: 80px 5%; }
+        .section-title { text-align: center; margin-bottom: 60px; }
+        .section-title h2 { font-size: 2.5rem; color: var(--primary); font-weight: 700; }
+        
+        .courses-grid { 
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 30px; max-width: 1300px; margin: 0 auto;
+        }
+        
+        .course-card { 
+            background: white; border-radius: 12px; overflow: hidden; 
+            box-shadow: 0 15px 30px rgba(0,0,0,0.05); transition: 0.3s; 
+            border: 1px solid #eee; display: flex; flex-direction: column;
+        }
+        .course-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); border-color: var(--primary); }
+        
+        /* SLIDESHOW CSS */
+        .img-wrapper { 
+            height: 240px; width: 100%; position: relative; overflow: hidden; 
+        }
+        
+        .img-wrapper img {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            animation: slideShow 12s infinite; 
+        }
+
+        .img-wrapper img:nth-child(1) { animation-delay: 0s; opacity: 1; }
+        .img-wrapper img:nth-child(2) { animation-delay: 4s; }
+        .img-wrapper img:nth-child(3) { animation-delay: 8s; }
+
+        @keyframes slideShow {
+            0% { opacity: 0; }
+            10% { opacity: 1; transform: scale(1.05); } 
+            33% { opacity: 1; transform: scale(1.1); }  
+            43% { opacity: 0; }  
+            100% { opacity: 0; }
+        }
+        
+        .badge { 
+            position: absolute; top: 20px; right: 20px; z-index: 10;
+            background: var(--accent); color: white; padding: 5px 15px; 
+            font-size: 0.8rem; border-radius: 4px; font-weight: 600; 
+        }
+
+        .card-body { padding: 30px; flex: 1; display: flex; flex-direction: column; }
+        .card-body h3 { font-size: 1.3rem; color: var(--primary); margin-bottom: 10px; font-weight: 700; min-height: 50px; }
+        .card-body p { color: var(--text-gray); font-size: 0.9rem; line-height: 1.6; margin-bottom: 20px; }
+        
+        .card-specs { 
+            display: flex; justify-content: space-between; margin-bottom: 25px; 
+            border-top: 1px solid #eee; border-bottom: 1px solid #eee; padding: 15px 0;
+        }
+        .spec { text-align: center; font-size: 0.8rem; color: #555; }
+        .spec i { color: var(--primary); font-size: 1.1rem; display: block; margin-bottom: 5px; }
+
+        .btn-course { 
+            margin-top: auto; display: block; text-align: center; 
+            border: 2px solid var(--primary); padding: 12px; border-radius: 6px; 
+            color: var(--primary); font-weight: 600; transition: 0.3s; 
+        }
+        .btn-course:hover { background: var(--primary); color: white; }
+
+        /* --- FOOTER --- */
+        footer { background: #1a1a1a; color: #aaa; padding: 70px 5%; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px; border-bottom: 1px solid #333; padding-bottom: 50px; margin-bottom: 20px; }
+        .footer-col h4 { color: white; margin-bottom: 25px; }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 12px; display: flex; gap: 10px;}
+        .social-icons { display: flex; gap: 15px; margin-top: 20px; }
+        .social-icons a { width: 40px; height: 40px; background: #333; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: 0.3s; }
+        .social-icons a:hover { background: var(--accent); }
+
+        /* Mobile */
+        @media (max-width: 900px) {
+            .logo-area img { height: 50px; }
+            .logo-text { font-size: 1.3rem; }
+            .logo-text span { font-size: 0.8rem; }
+            
+            .hero-content h1 { font-size: 2.2rem; }
+            .nav-links { display: none; }
+            .course-search { flex-direction: column; padding: 15px; border-radius: 15px; }
+            .course-search input { margin-bottom: 10px; border-radius: 5px; }
+            .course-search button { width: 100%; }
+            .courses-grid { grid-template-columns: 1fr; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER WITH BACK ARROW -->
+    <header>
+        <a href="index.html" class="logo-area">
+            <!-- BACK ARROW ADDED HERE -->
+            <i class="fas fa-arrow-left back-arrow"></i>
+            
+            <img src="logo.png" alt="Holyfaith Logo">
+            <div class="logo-text">
+                HOLYFAITH <span>GROUP</span>
+            </div>
+        </a>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="academics.html" style="color: var(--primary);">Academics</a>
+            <a href="admission.html" class="btn-apply">Apply Now</a>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <div class="acad-hero">
+        <video autoplay muted loop playsinline class="hero-bg" poster="https://images.pexels.com/photos/256417/pexels-photo-256417.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2">
+            <source src="https://videos.pexels.com/video-files/3196232/3196232-hd_1920_1080_25fps.mp4" type="video/mp4">
+        </video>
+        
+        <div class="hero-content">
+            <h1>Academic Excellence</h1>
+            <p>Explore our wide range of disciplines designed for the future.</p>
+            
+            <form class="course-search" onsubmit="event.preventDefault();">
+                <input type="text" placeholder="Search for courses (e.g. Nursing, Physio)...">
+                <button type="submit">Find Course</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- COURSES GRID (4 CARDS) -->
+    <section class="section-padding">
+        <div class="section-title">
+            <h2>Our Programs</h2>
+            <p style="color: var(--text-gray);">Undergraduate & Postgraduate degrees recognized globally.</p>
+        </div>
+
+        <div class="courses-grid">
+            
+            <!-- CARD 1: COLLEGE OF PHYSIOTHERAPY -->
+            <div class="course-card">
+                <div class="img-wrapper">
+                    <span class="badge">BPT / MPT</span>
+                    <img src="https://images.pexels.com/photos/5793953/pexels-photo-5793953.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Physio 1">
+                    <img src="https://images.pexels.com/photos/6129681/pexels-photo-6129681.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Physio 2">
+                    <img src="https://images.pexels.com/photos/7176036/pexels-photo-7176036.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Physio 3">
+                </div>
+                <div class="card-body">
+                    <h3>College of Physiotherapy</h3>
+                    <p>Advanced rehabilitation techniques, sports medicine, and hands-on clinical training.</p>
+                    <div class="card-specs">
+                        <div class="spec"><i class="fas fa-calendar-alt"></i> 4.5 Yrs</div>
+                        <div class="spec"><i class="fas fa-user-md"></i> Clinicals</div>
+                        <div class="spec"><i class="fas fa-dumbbell"></i> Rehab</div>
+                    </div>
+                    <a href="admission.html" class="btn-course">View Details</a>
+                </div>
+            </div>
+
+            <!-- CARD 2: COLLEGE OF NURSING -->
+            <div class="course-card">
+                <div class="img-wrapper">
+                    <span class="badge">B.Sc / M.Sc</span>
+                    <img src="https://images.pexels.com/photos/3844581/pexels-photo-3844581.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Nursing 1">
+                    <img src="https://images.pexels.com/photos/4386466/pexels-photo-4386466.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Nursing 2">
+                    <img src="https://images.pexels.com/photos/3985163/pexels-photo-3985163.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Nursing 3">
+                </div>
+                <div class="card-body">
+                    <h3>College of Nursing</h3>
+                    <p>Comprehensive professional nursing education with top-tier hospital attachments.</p>
+                    <div class="card-specs">
+                        <div class="spec"><i class="fas fa-calendar-alt"></i> 4 Yrs</div>
+                        <div class="spec"><i class="fas fa-heartbeat"></i> Care</div>
+                        <div class="spec"><i class="fas fa-hospital"></i> 100% Place</div>
+                    </div>
+                    <a href="admission.html" class="btn-course">View Details</a>
+                </div>
+            </div>
+
+            <!-- CARD 3: SCHOOL OF NURSING -->
+            <div class="course-card">
+                <div class="img-wrapper">
+                    <span class="badge">GNM / Diploma</span>
+                    <img src="https://images.pexels.com/photos/1181396/pexels-photo-1181396.jpeg?auto=compress&cs=tinysrgb&w=800" alt="School Nursing 1">
+                    <img src="https://images.pexels.com/photos/3845625/pexels-photo-3845625.jpeg?auto=compress&cs=tinysrgb&w=800" alt="School Nursing 2">
+                    <img src="https://images.pexels.com/photos/5452201/pexels-photo-5452201.jpeg?auto=compress&cs=tinysrgb&w=800" alt="School Nursing 3">
+                </div>
+                <div class="card-body">
+                    <h3>School of Nursing</h3>
+                    <p>Foundational nursing programs designed to create skilled and compassionate care providers.</p>
+                    <div class="card-specs">
+                        <div class="spec"><i class="fas fa-calendar-alt"></i> 3 Yrs</div>
+                        <div class="spec"><i class="fas fa-hands-helping"></i> Service</div>
+                        <div class="spec"><i class="fas fa-book-medical"></i> GNM</div>
+                    </div>
+                    <a href="admission.html" class="btn-course">View Details</a>
+                </div>
+            </div>
+
+            <!-- CARD 4: COLLEGE OF MEDICAL LAB TECHNOLOGY -->
+            <div class="course-card">
+                <div class="img-wrapper">
+                    <span class="badge">B.Sc MLT</span>
+                    <img src="https://images.pexels.com/photos/2280568/pexels-photo-2280568.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Lab 1">
+                    <img src="https://images.pexels.com/photos/3735707/pexels-photo-3735707.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Lab 2">
+                    <img src="https://images.pexels.com/photos/356040/pexels-photo-356040.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Lab 3">
+                </div>
+                <div class="card-body">
+                    <h3>College of Medical Lab Technology</h3>
+                    <p>Mastering diagnostic precision, pathology, and microbiology in modern laboratories.</p>
+                    <div class="card-specs">
+                        <div class="spec"><i class="fas fa-calendar-alt"></i> 3 Yrs</div>
+                        <div class="spec"><i class="fas fa-microscope"></i> Lab</div>
+                        <div class="spec"><i class="fas fa-flask"></i> Research</div>
+                    </div>
+                    <a href="admission.html" class="btn-course">View Details</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h2 style="color:white; margin-bottom: 20px;">HOLYFAITH</h2>
+                <p>Empowering the future generation through excellence in education.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="admission.html">Admissions</a></li>
+                    <li><a href="academics.html">Academics</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <ul class="footer-links">
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Jyothinagar, Marripalem Near Raman school<br>Visakhapatnam, Andhra Pradesh 530018</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-phone"></i>
+                        <div style="display:flex; flex-direction:column;">
+                            <span>8125 444 777</span>
+                            <span>9154 451 345</span>
+                            <span>9908 777 465</span>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <span>Holyfaithgroupofinstitutions@gmail.com</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <p style="text-align: center; border-top: 1px solid #333; padding-top: 20px;">&copy; 2026 Holyfaith Group of Institutions. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
